@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简单RPG游戏</title>
+    <title>異世界冒險RPG</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,94 +15,20 @@
             background-color: #f0f0f0;
         }
         #game-container {
+            width: 800px;
+            height: 600px;
             background-color: white;
+            border: 2px solid #333;
             padding: 20px;
-            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
-        <h1>简单RPG游戏</h1>
-        <p>玩家等级: <span id="player-level">1</span></p>
-        <p>玩家生命值: <span id="player-hp">100</span></p>
-        <p>玩家经验值: <span id="player-exp">0</span></p>
-        <p>怪物生命值: <span id="monster-hp">50</span></p>
-        <button onclick="attack()">攻击怪物</button>
-        <p id="battle-log"></p>
+        <h1>異世界冒險RPG</h1>
+        <div id="game-screen"></div>
     </div>
-
-    <script>
-        let playerLevel = 1;
-        let playerHp = 100;
-        let playerExp = 0;
-        let monsterHp = 50;
-
-        function attack() {
-            let damage = Math.floor(Math.random() * 10) + 1;
-            monsterHp -= damage;
-            document.getElementById('monster-hp').textContent = monsterHp;
-            document.getElementById('battle-log').textContent = `你对怪物造成了${damage}点伤害！`;
-
-            if (monsterHp <= 0) {
-                playerExp += 20;
-                document.getElementById('player-exp').textContent = playerExp;
-                document.getElementById('battle-log').textContent += ' 你击败了怪物！获得20点经验值。';
-                
-                if (playerExp >= 100) {
-                    levelUp();
-                }
-                
-                resetMonster();
-            } else {
-                monsterAttack();
-            }
-        }
-
-        function monsterAttack() {
-            let damage = Math.floor(Math.random() * 5) + 1;
-            playerHp -= damage;
-            document.getElementById('player-hp').textContent = playerHp;
-            document.getElementById('battle-log').textContent += ` 怪物对你造成了${damage}点伤害！`;
-
-            if (playerHp <= 0) {
-                alert('游戏结束！你被怪物打败了。');
-                resetGame();
-            }
-        }
-
-        function levelUp() {
-            playerLevel++;
-            playerHp = 100 + (playerLevel - 1) * 20;
-            playerExp = 0;
-            document.getElementById('player-level').textContent = playerLevel;
-            document.getElementById('player-hp').textContent = playerHp;
-            document.getElementById('player-exp').textContent = playerExp;
-            alert(`恭喜！你升到了${playerLevel}级！`);
-        }
-
-        function resetMonster() {
-            monsterHp = 50 + (playerLevel - 1) * 10;
-            document.getElementById('monster-hp').textContent = monsterHp;
-        }
-
-        function resetGame() {
-            playerLevel = 1;
-            playerHp = 100;
-            playerExp = 0;
-            monsterHp = 50;
-            document.getElementById('player-level').textContent = playerLevel;
-            document.getElementById('player-hp').textContent = playerHp;
-            document.getElementById('player-exp').textContent = playerExp;
-            document.getElementById('monster-hp').textContent = monsterHp;
-            document.getElementById('battle-log').textContent = '';
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
